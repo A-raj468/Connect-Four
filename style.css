@@ -1,0 +1,28 @@
+#game_area{
+    height: max(33vw, 240px);
+    width: max(38.5vw, 280px);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: max(10vw, 80px);
+    margin-bottom: auto;
+}
+
+table#game{
+    height: 100%;
+    width: 100%;
+    background-color: #444;
+    border-collapse: collapse;
+    padding: 1vw;
+}
+
+table#game > tbody > tr, table#game > tbody > tr > td{
+    width: auto;
+    height: auto;
+    background-color: #0002F8;
+    text-align: center;
+}
+
+table#game > tbody > tr > td > img{
+    width: 100%;
+    height: auto;
+}
