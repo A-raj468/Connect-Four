@@ -5,6 +5,7 @@
     margin-right: auto;
     margin-top: max(10vw, 80px);
     margin-bottom: auto;
+    z-index: 0;
 }
 
 table#game{
@@ -25,4 +26,53 @@ table#game > tbody > tr, table#game > tbody > tr > td{
 table#game > tbody > tr > td > img{
     width: 100%;
     height: auto;
+}
+
+.popup .overlay{
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+}
+
+.popup .content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: all 200ms ease-in-out;
+    transform: translate(-50%, -50%) scale(0);
+    background: #ccc;
+    width: 50%;
+    height: 50%;
+    z-index: 2;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.popup .close{
+    margin-left: 47vw;
+    margin-top: 0.5vw;
+    height: 2vw;
+    width: 2vw;
+    border-radius: 50%;
+    background-color: #222;
+    color: #ccc;
+    font-size: x-large;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.popup.active .overlay{
+    display: block;
+}
+
+.popup.active .content{
+    transition: all 200ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
 }

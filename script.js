@@ -9,28 +9,50 @@ var tiles = new Array(M);
 var turn = 1;
 var empty = N*M;
 
-place_chip = function(col, turn){
+generate_moves = function(mode){
+    switch(mode){
+        // Random moves mode
+        case 0:
+            return Math.floor(Math.random()*7);
+    }
+}
+
+minimax = function(board, turn){
+    for(let i=0; i<7; i++){
+        var td = null;
+        for(let i=5; i>=0; i--){
+            if(tiles[i][col].occupied == 0){
+                td = tiles[i][col];
+            }
+        }
+        if(td != null){
+            win = check_for_win(td);
+        }
+    }
+}
+
+place_chip = function(col){
     for(let i=5; i>=0; i--){
         if(tiles[i][col].occupied == 0){
             tiles[i][col].occupied = turn;
             tiles[i][col].draw();
             if(check_for_win(tiles[i][col])){
-                setTimeout(function(){
-                    var text = turn == 1? "Red": "Yellow";
-                    alert(text + " won!");
-                }, 0)
+                var text = turn == 1? "Red": "Yellow";
+                document.getElementById('msz').innerText = text + " won!";
+                toggle_popup();
             }
-            return true;
+            turn = -turn;
+            return tiles[i][col];
         }
     }
-    return false;
+    return null;
 }
 
 check_for_win = function(td){
     var row = td.parentNode.rowIndex;
     var col = td.cellIndex;
     var count = 1;
-    var occ = td.occupied;
+    var occ = turn;
 
     for(let i=1; i<4; i++){
         if(col-i>=0 && tiles[row][col-i].occupied == occ) count++;
@@ -93,38 +115,53 @@ check_for_win = function(td){
     return false;
 }
 
-for(let i=0; i<M; i++){
-    tiles[i] = new Array(N);
-    var tr = table.insertRow();
-    for(let j=0; j<N; j++){
-        var td = tr.insertCell();
-        var img = document.createElement('img');
-        td.occupied = 0;
-        td.draw = function(){
-            var image = this.getElementsByTagName('img')[0];
-            if(this.occupied == -1){
-                image.src = "Img/yellow.png";
-            }
-            else if(this.occupied == 0){
-                image.src = "Img/black.png";
-            }
-            else if(this.occupied == 1){
-                image.src = "Img/red.png";
-            }
-        }
-        td.addEventListener('click', function(){
-            if(empty > 0){
-                if(place_chip(this.cellIndex, turn)){
-                    turn = -turn;
-                    empty--;
+init_board = function(){
+    for(let i=0; i<M; i++){
+        tiles[i] = new Array(N);
+        var tr = table.insertRow();
+        for(let j=0; j<N; j++){
+            var td = tr.insertCell();
+            var img = document.createElement('img');
+            td.occupied = 0;
+            td.draw = function(){
+                var image = this.querySelector('img');
+                if(this.occupied == -1){
+                    image.src = "Img/yellow.png";
+                }
+                else if(this.occupied == 0){
+                    image.src = "Img/black.png";
+                }
+                else if(this.occupied == 1){
+                    image.src = "Img/red.png";
                 }
             }
-            else{
-                alert("Board is full! Please restart the game.")
-            }
-        });
-        td.appendChild(img);
-        td.draw();
-        tiles[i][j] = td;
+            td.addEventListener('click', function(){
+                if(empty > 0){
+                    var cell = place_chip(this.cellIndex);
+                    if(cell != null){
+                        empty--;
+                    }
+                    setTimeout(function(){
+                        var opp = place_chip(generate_moves(0));
+                        while(opp == null){
+                            opp = place_chip(generate_moves(0));
+                        }
+                        empty--;
+                    }, 0);
+                }
+                else{
+                    alert("Board is full! Please restart the game.")
+                }
+            });
+            td.appendChild(img);
+            td.draw();
+            tiles[i][j] = td;
+        }
     }
+}
+
+init_board();
+
+toggle_popup = function(){
+    document.getElementById('popup').classList.toggle('active');
 }
