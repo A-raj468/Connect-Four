@@ -11,15 +11,15 @@
 table#game{
     height: 100%;
     width: 100%;
-    background-color: #444;
+    background-color: #0002F8;
     border-collapse: collapse;
     padding: 1vw;
+    border-radius: 4%;
 }
 
 table#game > tbody > tr, table#game > tbody > tr > td{
     width: auto;
     height: auto;
-    background-color: #0002F8;
     text-align: center;
 }
 
@@ -45,7 +45,7 @@ table#game > tbody > tr > td > img{
     left: 50%;
     transition: all 200ms ease-in-out;
     transform: translate(-50%, -50%) scale(0);
-    background: #ccc;
+    background: #fff;
     width: 50%;
     height: 50%;
     z-index: 2;
@@ -53,19 +53,24 @@ table#game > tbody > tr > td > img{
     box-sizing: border-box;
 }
 
-.popup .close{
-    margin-left: 47vw;
-    margin-top: 0.5vw;
-    height: 2vw;
-    width: 2vw;
-    border-radius: 50%;
-    background-color: #222;
-    color: #ccc;
-    font-size: x-large;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
+.popup .content > div.title{
+    height: 10%;
+    padding-top: 0;
+}
+
+.popup .content > div.title > p{
+    width: 50%;
+    padding-inline: 20%;
+    margin-top: 2%;
+}
+
+.popup .content > div.title > button.close{
+    /* float: right; */
+}
+
+.popup .content > button.restart{
+    height: 10%;
+    width: 20%;
 }
 
 .popup.active .overlay{

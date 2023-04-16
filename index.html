@@ -9,16 +9,20 @@
     
     <script defer src="new_script.js"></script>
 </head>
-<body>
-    <div id="game_area">
+<body onload="board_initialize(board, M, N, tiles)">
+    <div id="game_area" onload="board_initialize(board, M, N, tiles)">
         <table id="game"></table>
     </div>
     <div class="popup" id="popup">
         <div class="overlay"></div>
         <div class="content">
-            <button class="close" onclick="toggle_popup();">&times;</button>
+            <div class="title">
+                <p style="display: inline-block;">Game Over</p>
+                <button class="close" onclick="toggle_popup();">&times;</button>
+            </div>
             <hr>
             <p id="msz">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure id culpa dolorem.</p>
+            <button class="restart" onclick="window.location.reload()">Play Again!</button>
         </div>
     </div>
 </body>
