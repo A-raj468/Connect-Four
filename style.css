@@ -1,3 +1,7 @@
+body{
+    background-color: #F9E2AF;
+}
+
 #game_area{
     height: max(33vw, 240px);
     width: max(38.5vw, 280px);
@@ -6,13 +10,21 @@
     margin-top: max(10vw, 80px);
     margin-bottom: auto;
     z-index: 0;
+    text-align: center;
+}
+
+#restart{
+    background-color: #F9E2AF;
+    border-radius: 2vw;
+    height: 4vw;
+    margin-bottom: 4vw;
 }
 
 table#game{
     height: 100%;
     width: 100%;
-    background-color: #0002F8;
-    border-collapse: collapse;
+    background-color: #009FBD;
+    /* border-collapse: collapse; */
     padding: 1vw;
     border-radius: 4%;
 }
@@ -51,6 +63,7 @@ table#game > tbody > tr > td > img{
     z-index: 2;
     text-align: center;
     box-sizing: border-box;
+    border-radius: 2%;
 }
 
 .popup .content > div.title{

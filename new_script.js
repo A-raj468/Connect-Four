@@ -119,7 +119,7 @@ board_initialize = function(table, M, N, tiles){
                             let w = checkWin(tiles, r-1, col);
                             if(w != 0){
                                 turn = 0;
-                                let msz = "Player " + (w == 1? "1":"2") + " wins!";
+                                let msz = (w == 1? "Red":"Yellow") + " wins!";
                                 console.log(msz);
                                 document.querySelector('#msz').innerHTML = msz;
                                 toggle_popup();
